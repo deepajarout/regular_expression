@@ -32,3 +32,14 @@ Regular expressions may have 6 flags in JavaScript
 * The method ```str.match(regexp)``` looks for matches: all of them if there’s ```g flag```, otherwise, only the first one.
 * The method ```str.replace(regexp, replacement)``` replaces matches found using regexp with replacement: all of them if there’s ```g flag```, otherwise only the first one.
 * The method ```regexp.test(str)``` returns ```true``` if there’s at least one match, otherwise, it returns ```false.```
+
+**Symbols**
+
+| Symbols        | Action in the replacement string | 
+| ------------- |:-------------:| 
+| $&    | inserts the whole match | 
+| $`    | inserts a part of the string before the match     | 
+| $' |inserts a part of the string after the match       |  
+| $n | if n is a 1-2 digit number, then it inserts the contents of n-th parentheses     |  
+|$<name>| inserts the contents of the parentheses with the given name |  
+|	$$ |inserts character $ |
