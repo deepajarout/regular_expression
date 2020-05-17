@@ -133,3 +133,39 @@ Here the match for \d\d:\d\d must start exactly after the beginning of the text 
 Anchors ^ and $ are tests. They have zero width.
 
 In other words, they do not match a character, but rather force the regexp engine to check the condition (text start/end)
+
+----
+
+# Multiline mode of anchors ^ $, flag "m"
+The multiline mode is enabled by the ```flag m.```
+
+It only affects the behavior of ```^ and $.```
+
+In the multiline mode they match not only at the beginning and the end of the string, but also at start/end of line.
+
+**Searching at line start ^**
+The pattern ``` /^\d/gm ``` takes a digit from the beginning of each line.Without the flag ```m ``` only the first digit is matched.
+
+**Searching at line end $**
+The regular expression ```\d$``` finds the last digit in every line.Without the flag m, the dollar $ would only match the end of the whole text, so only the very last digit would be found.
+
+
+**Searching for \n instead of ^ $**
+To find a newline, we can use not only anchors ^ and $, but also the newline character \n.
+Here we search for ```\d\n``` instead of ``` \d$```.
+
+```javascript
+let str = `Winnie: 1
+Piglet: 2
+Eeyore: 3`;
+
+alert( str.match(/\d\n/gm) ); // 1\n,2\n
+```
+s we can see, there are 2 matches instead of 3.
+
+That’s because there’s no newline after 3 (there’s text end though, so it matches $).
+
+Another difference: now every match includes a newline character \n. Unlike the anchors ^ $, that only test the condition (start/end of a line), \n is a character, so it becomes a part of the result.
+
+So, a \n in the pattern is used when we need newline characters in the result, while anchors are used to find something at the beginning/end of a line.
+
