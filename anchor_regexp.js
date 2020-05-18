@@ -40,3 +40,14 @@ console.log( str.match(/\d\n/gm) ); // 1\n,2\n   \n in the pattern is used when 
 //", "2
 //"]
 console.log( str1.match(/\d$/gm) );  //["1", "2", "3"]
+
+
+
+
+//----------------------------Word boundary: \b---------------------------------------------------------
+
+console.log( "Hello, Java!".match(/\bJava\b/) ); // Java
+console.log( "Hello, JavaScript!".match(/\bJava\b/) ); // null
+
+console.log( "1 23 456 78".match(/\b\d\d\b/g) ); // 23,78
+console.log( "12,34,56".match(/\b\d\d\b/g) ); // 12,34,56
