@@ -169,3 +169,34 @@ Another difference: now every match includes a newline character \n. Unlike the 
 
 So, a \n in the pattern is used when we need newline characters in the result, while anchors are used to find something at the beginning/end of a line.
 
+# Word boundary: \b
+
+A word boundary \b is a test, just like ^ and $.
+
+When the regexp engine (program module that implements searching for regexps) comes across \b, it checks that the position in the string is a word boundary.
+
+There are three different positions that qualify as word boundaries:
+
+* At string start, if the first string character is a word character \w.
+* Between two characters in the string, where one is a word character \w and the other is not.
+* At string end, if the last string character is a word character \w.
+
+In the string ``` Hello, Java! ``` following positions correspond to \b:
+So, it matches the pattern ```\bHello\b```, because:
+
+* At the beginning of the string matches the first test \b.
+* Then matches the word Hello.
+* Then the test \b matches again, as we’re between o and a space.
+
+```javascript
+
+alert( "Hello, Java!".match(/\bHello\b/) ); // Hello
+alert( "Hello, Java!".match(/\bJava\b/) );  // Java
+alert( "Hello, Java!".match(/\bHell\b/) );  // null (no match)
+alert( "Hello, Java!".match(/\bJava!\b/) ); // null (no match) because the exclamation sign is not a wordly character \w, so there’s no word boundary after it
+
+```
+**Note : Word boundary \b doesn’t work for non-latin alphabets**
+The word boundary test \b checks that there should be \w on the one side from the position and "not \w" – on the other side.
+
+But \w means a latin letter a-z (or a digit or an underscore), so the test doesn’t work for other characters, e.g. cyrillic letters or hieroglyphs.
