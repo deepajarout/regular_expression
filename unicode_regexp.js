@@ -12,14 +12,14 @@ console.log
 
 //----------------------- hexadecimal numbers------------------------------------
 
-let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;
+let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;  // {Hex_Digit} used for hexadecimal number
 
 console.log("number: xAF".match(regexp)); // xAF
 
 
 //--------------------------Chinese hieroglyphs------------------------------------
 
-let regexp = /\p{sc=Han}/gu; // returns Chinese hieroglyphs
+let regexp = /\p{sc=Han}/gu; // returns Chinese hieroglyphs {sc=Han}
 
 let str = `Hello Привет 你好 123_456`;
 
@@ -29,7 +29,7 @@ console.log( str.match(regexp) ); // 你,好
 
 //------------------------------Currency--------------------------------------------
 
-let regexp = /\p{Sc}\d/gu;
+let regexp = /\p{Sc}\d/gu; // {Sc} used for Currency
 
 let  str = `Prices: $2, €1, ¥9`;
 
