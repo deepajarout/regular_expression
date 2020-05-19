@@ -48,7 +48,25 @@ Usually when we want to find exactly a special character, we need to escape it l
 
 In square brackets we can use the vast majority of special characters without escaping:
 
-*Symbols . + ( ) never need escaping.
-*A hyphen - is not escaped in the beginning or the end (where it does not define a range). when we used - first or last that time no need of backslash but in middle we need otherwise it give you error/[()/.\-+]/g
-*A caret ^ is only escaped in the beginning (where it means exclusion or when we use caret after [ we need backslash). /[\^()-.+]/g or /[()-.^+]/g
-*The closing square bracket ] is always escaped (if we need to look for that symbol).
+* Symbols . + ( ) never need escaping.
+* A hyphen - is not escaped in the beginning or the end (where it does not define a range). when we used - first or last that time no need of backslash but in middle we need otherwise it give you error/[()/.\-+]/g
+* A caret ^ is only escaped in the beginning (where it means exclusion or when we use caret after [ we need backslash). /[\^()-.+]/g or /[()-.^+]/g
+* The closing square bracket ] is always escaped (if we need to look for that symbol).
+
+**Ranges and flag “u”**
+If there are surrogate pairs in the set, flag u is required for them to work correctly.
+example: [x,y] or [x-y]
+```javascript
+console.log( '𝒳'.match(/[𝒳𝒴]/) ); // not correct
+console.log( '𝒳'.match(/[𝒳𝒴]/u) ); //correct ["x"]
+```
+The result is incorrect, because by default regular expressions “don’t know” about surrogate pairs.
+
+The regular expression engine thinks that [𝒳𝒴] – are not two, but four characters:
+
+left half of 𝒳 (1),
+right half of 𝒳 (2),
+left half of 𝒴 (3),
+right half of 𝒴 (4).
+
+
