@@ -37,3 +37,18 @@ Connector_Punctuation (Pc) – for the underscore '_' and similar characters,
 Join_Control (Join_C) – two special codes 200c and 200d, used in ligatures, e.g. in Arabic.
 
 ```**NOTE** Unicode properties p{…} are not yet implemented in Edge and Firefox. If we really need them, we can use library XRegExp.Or just use ranges of characters in a language that interests us, e.g. [а-я] for Cyrillic letters.```
+
+**Excluding ranges**  “excluding” ranges that look like [^…].
+* [^aeyo] – any character except 'a', 'e', 'y' or 'o'.
+* [^0-9] – any character except a digit, the same as \D.
+* [^\s] – any non-space character, same as \S.
+
+**Escaping in […]**
+Usually when we want to find exactly a special character, we need to escape it like \.. And if we need a backslash, then we use \\, and so on.
+
+In square brackets we can use the vast majority of special characters without escaping:
+
+*Symbols . + ( ) never need escaping.
+*A hyphen - is not escaped in the beginning or the end (where it does not define a range). when we used - first or last that time no need of backslash but in middle we need otherwise it give you error/[()/.\-+]/g
+*A caret ^ is only escaped in the beginning (where it means exclusion or when we use caret after [ we need backslash). /[\^()-.+]/g or /[()-.^+]/g
+*The closing square bracket ] is always escaped (if we need to look for that symbol).
