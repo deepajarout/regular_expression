@@ -27,4 +27,20 @@ So, colou?r finds both color and colour:
 * ```*``` Means “zero or more”, the same as {0,}. That is, the character may repeat any times or be absent.
 
 For example, \d0* looks for a digit followed by any number of zeroes (may be many or none):
+* ```+``` Compare it with + (one or more): ```\dO+```(as 0+ requires at least one zero).
+
+**Regexp for decimal fractions (a number with a floating point)**
+```\d+\.\d+``` 
+
+**Regexp for an opening HTML-tag without attributes such as** 
+```html
+<span> or <p>
+```
+  
+  * The simplest one: /<[a-z]+>/i
+  * Improved: /<[a-z][a-z0-9]*>/i
+
+  According to the standard, HTML tag name may have a digit at any position except the first one, like h1.
+  
+  **Regexp “opening or closing HTML-tag without attributes”:** /<\/?[a-z][a-z0-9]*>/i
 
