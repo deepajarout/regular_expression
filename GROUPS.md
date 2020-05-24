@@ -58,3 +58,47 @@ The zero index of result always holds the full match.
 Then groups, numbered from left to right by an opening paren. The first group is returned as result[1]. Here it encloses the whole tag content.
 
 Then in result[2] goes the group from the second opening paren ([a-z]+) – tag name, then in result[3] the tag: ([^>]*).
+
+---
+# Optional groups
+
+Even if a group is optional and doesn’t exist in the match (e.g. has the quantifier (...)?), the corresponding result array item is present and equals undefined.
+```javscript
+let match = 'ac'.match(/a(z)?(c)?/)
+
+alert( match.length ); // 3
+alert( match[0] ); // ac (whole match)
+alert( match[1] ); // undefined, because there's nothing for (z)?
+alert( match[2] ); // c
+```
+
+**Searching for all matches with groups: matchAll**The method matchAll is not supported in old browsers.
+
+# Difference between match and matchAll
+there are 3 differences:
+
+* It returns not an array, but an iterable object.
+* When the flag g is present, it returns every match as an array with groups.
+* If there are no matches, it returns not null, but an empty iterable object.
+
+**match**
+```javascrript
+let results = '<h1> <h2>'.match(/<(.*?)>/gi);
+console.log(results); // ["h1","h2"]
+```
+
+**matchAll**
+```javascrript
+let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
+
+// results - is not an array, but an iterable object
+console.log(results); // [object RegExp String Iterator]
+
+console.log(results[0]); // undefined (*)
+
+results = Array.from(results); // let's turn it into array
+
+console.log(results[0]); // <h1>,h1 (1st tag)
+console.log(results[1]); // <h2>,h2 (2nd tag)
+```
+
