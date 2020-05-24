@@ -110,4 +110,66 @@ console.log(results[0]); // <h1>,h1 (1st tag)
 console.log(results[1]); // <h2>,h2 (2nd tag)
 
 ```
+As we can see, the first difference is very important, as demonstrated in the line (*). We can’t get the match as results[0], because that object isn’t pseudoarray. We can turn it into a real Array using Array.from.
 
+
+**Why is a result of matchAll an iterable object, not an array?**
+
+**REASON:** Why is the method designed like that? The reason is simple – for the optimization.
+
+The call to matchAll does not perform the search. Instead, it returns an iterable object, without the results initially. The search is performed each time we iterate over it, e.g. in the loop.
+
+So, there will be found as many results as needed, not more.
+
+E.g. there are potentially 100 matches in the text, but in a for..of loop we found 5 of them, then decided it’s enough and make a break. Then the engine won’t spend time finding other 95 matches.
+
+---
+
+# Named groups
+
+Remembering groups by their numbers is hard. For simple patterns it’s doable, but for more complex ones counting parentheses is inconvenient. We have a much better option: give names to parentheses.
+
+That’s done by putting ?<name> immediately after the opening paren.
+  
+  ```javascript
+  let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
+let str = "2019-04-30";
+
+let groups = str.match(dateRegexp).groups;
+
+console.log(groups.year); // 2019
+console.log(groups.month); // 04
+console.log(groups.day); // 30
+```
+To look for all dates, we can add flag g.
+
+---
+
+# Capturing groups in replacement
+Method str.replace(regexp, replacement) that replaces all matches with regexp in str allows to use parentheses contents in the replacement string. That’s done using $n, where n is the group number.
+```javascript
+let str = "John Bull";
+let regexp = /(\w+) (\w+)/;
+
+alert( str.replace(regexp, '$2, $1') ); // Bull, John
+```
+---
+
+# Non-capturing groups with ?:
+Sometimes we need parentheses to correctly apply a quantifier, but we don’t want their contents in results.
+
+A group may be excluded by adding ?: in the beginning.
+
+For instance, if we want to find (go)+, but don’t want the parentheses contents (go) as a separate array item, we can write: (?:go)+.
+```javascript
+let str = "Gogogo John!";
+
+// ?: exludes 'go' from capturing
+let regexp = /(?:go)+ (\w+)/i;
+
+let result = str.match(regexp);
+
+alert( result[0] ); // Gogogo John (full match)
+alert( result[1] ); // John
+alert( result.length ); // 2 (no more items in the array)
+```
