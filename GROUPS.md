@@ -9,6 +9,7 @@ Without parentheses, the pattern go+ means g character, followed by o repeated o
 
 Parentheses group characters together, so (go)+ means go, gogo, gogogo and so on.
 ```javascript
+
 let regexp = /[-.\w]+@([\w-]+\.)+[\w-]+/g;
 
 console.log("my@mail.com @ his@site.com.uk".match(regexp));
@@ -40,6 +41,7 @@ For instance, when searching a tag in ```<span class="my">``` we may be interest
 * The tag name: span.
 T* he tag attributes: class="my".
 Let’s add parentheses for them:``` <( ([a-z]+) \s* ([^>]*) )>```.
+
 ```javascript
 let str = '<span class="my">';
 
@@ -82,13 +84,16 @@ there are 3 differences:
 * If there are no matches, it returns not null, but an empty iterable object.
 
 **match**
-```javascrript
+```javascript
+
 let results = '<h1> <h2>'.match(/<(.*?)>/gi);
 console.log(results); // ["h1","h2"]
+
 ```
 
 **matchAll**
-```javascrript
+```javascript
+
 let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
 
 // results - is not an array, but an iterable object
@@ -100,5 +105,6 @@ results = Array.from(results); // let's turn it into array
 
 console.log(results[0]); // <h1>,h1 (1st tag)
 console.log(results[1]); // <h2>,h2 (2nd tag)
+
 ```
 
