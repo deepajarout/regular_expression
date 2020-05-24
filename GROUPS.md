@@ -65,13 +65,16 @@ Then in result[2] goes the group from the second opening paren ([a-z]+) – tag 
 # Optional groups
 
 Even if a group is optional and doesn’t exist in the match (e.g. has the quantifier (...)?), the corresponding result array item is present and equals undefined.
-```javscript
+
+```javascript
+
 let match = 'ac'.match(/a(z)?(c)?/)
 
 alert( match.length ); // 3
 alert( match[0] ); // ac (whole match)
 alert( match[1] ); // undefined, because there's nothing for (z)?
 alert( match[2] ); // c
+
 ```
 
 **Searching for all matches with groups: matchAll**The method matchAll is not supported in old browsers.
