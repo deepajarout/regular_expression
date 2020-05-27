@@ -174,7 +174,7 @@ alert( result[1] ); // John
 alert( result.length ); // 2 (no more items in the array)
 ```
 ---
-# Backreferences in pattern: \N and \k```html <name> ```
+# Backreferences in pattern: \N and \k``` <name> ```
   
   **Backreference by number: \N**
   A group can be referenced in the pattern using \N, where N is the group number.
@@ -204,11 +204,11 @@ If we use ?: in the group, then we can’t reference it. Groups that are exclude
 
 In the replacement string we use a dollar sign: $1, while in the pattern – a backslash \1.
 
-**Backreference by name: \k```html <name> ```**
+**Backreference by name: \k```<name> ```**
   
   If a regexp has many parentheses, it’s convenient to give them names.
 
-To reference a named group we can use \k```html <name> ```.
+To reference a named group we can use \k``` <name> ```.
 
 In the example below the group with quotes is named ?<quote>, so the backreference is \k<quote>:
   
