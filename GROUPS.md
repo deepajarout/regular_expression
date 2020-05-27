@@ -173,3 +173,12 @@ alert( result[0] ); // Gogogo John (full match)
 alert( result[1] ); // John
 alert( result.length ); // 2 (no more items in the array)
 ```
+# Backreferences in pattern: \N and \k<name>
+  
+  
+  **Backreference by number: \N**
+  A group can be referenced in the pattern using \N, where N is the group number.
+  We need to find quoted strings: either single-quoted '...' or a double-quoted "..." – both variants should match.
+  How to find them?
+
+
