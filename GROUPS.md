@@ -173,12 +173,79 @@ alert( result[0] ); // Gogogo John (full match)
 alert( result[1] ); // John
 alert( result.length ); // 2 (no more items in the array)
 ```
+---
 # Backreferences in pattern: \N and \k<name>
-  
   
   **Backreference by number: \N**
   A group can be referenced in the pattern using \N, where N is the group number.
   We need to find quoted strings: either single-quoted '...' or a double-quoted "..." – both variants should match.
   How to find them?
+  We can put both kinds of quotes in the square brackets: ['"](.*?)['"], but it would find strings with mixed quotes, like "...' and '...". That would lead to incorrect matches when one quote appears inside other ones, like in the string "She's the one!":
+  ```To make sure that the pattern looks for the closing quote exactly the same as the opening one, we can wrap it into a capturing group and backreference it: (['"])(.*?)\1.```
+  
+  ```javascript
+  // without using Backreferences 
+  let str = `He said: "She's the one!".`;
+  let regexp = /['"](.*?)['"]/g;
+// The result is not what we'd like to have
+  console.log( str.match(regexp) ); // "She'
+
+//--------------------------------------
+ //Using Backreferences
+ let str = `He said: "She's the one!".`;
+ let regexp = /(['"])(.*?)\1/g;
+ console.log( str.match(regexp) ); // "She's the one!"
+ ```
+ 
+ **Please note:**
+If we use ?: in the group, then we can’t reference it. Groups that are excluded from capturing (?:...) are not memorized by the engine.
+
+**Don’t mess up: in the pattern \1, in the replacement: **$1
+
+In the replacement string we use a dollar sign: $1, while in the pattern – a backslash \1.
+
+**Backreference by name: \k<name>**
+  
+  If a regexp has many parentheses, it’s convenient to give them names.
+
+To reference a named group we can use \k<name>.
+
+In the example below the group with quotes is named ?<quote>, so the backreference is \k<quote>:
+  
+  ```javascript
+  let str = `He said: "She's the one!".`;
+
+let regexp = /(?<quote>['"])(.*?)\k<quote>/g;
+
+alert( str.match(regexp) ); // "She's the one!"
+```
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
