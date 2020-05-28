@@ -41,4 +41,28 @@ With the rewritten pattern (\w+\s)*, that’s impossible: there may be \w+\s or 
 
 ---
 
-**2** Preventing backtracking -
+**2** **Preventing backtracking -** The pattern to take as much repetitions of \w as possible without backtracking is: (?=(\w+))\1.
+```javascript
+
+alert( "JavaScript".match(/\w+Script/)); // JavaScript
+alert( "JavaScript".match(/(?=(\w+))\1Script/)); // null
+
+```
+Let’s rewrite the first example using lookahead to prevent backtracking:
+
+```javascript
+
+let regexp = /^((?=(\w+))\2\s?)*$/;
+alert( regexp.test("A good string") ); // true
+let str = "An input string that takes a long time or even makes this regex to hang!";
+alert( regexp.test(str) ); // false, works and fast!
+
+//OR
+// parentheses are named ?<word>, referenced as \k<word>
+
+let regexp = /^((?=(?<word>\w+))\k<word>\s?)*$/;
+let str = "An input string that takes a long time or even makes this regex to hang!";
+alert( regexp.test(str) ); // false
+alert( regexp.test("A correct string") ); // true
+
+```
