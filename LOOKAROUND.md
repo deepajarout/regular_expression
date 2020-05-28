@@ -26,3 +26,11 @@ let str = "2 turkeys cost 60€";
 alert( str.match(/\d+(?!€)/) ); // 2 (the price is skipped)
 
 ```
+
+# Lookbehind
+Lookahead allows to add a condition for “what follows”.
+Lookbehind is similar, but it looks behind. That is, it allows to match a pattern only if there’s something before it.
+The syntax is:
+
+**Positive lookbehind:** (?<=Y)X, matches X, but only if there’s Y before it.
+**Negative lookbehind:**  (?<!Y)X, matches X, but only if there’s no Y before it.
