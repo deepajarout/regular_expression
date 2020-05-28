@@ -35,10 +35,11 @@ console.log(word3); // null (no more matches)
 console.log(regexp.lastIndex); // 0 (resets at search end)
 
 ```
-**Please note:**the search starts at position lastIndex and then goes further.
+**Please note:** the search starts at position lastIndex and then goes further.
 If there’s no word at position lastIndex, but it’s somewhere after it, then it will be found:
 …So, with flag g property lastIndex sets the starting position for the search.
 Flag y makes regexp.exec to look exactly at position lastIndex, not before, not after it.
+
 ```javascript
 
 let str = 'let varName = "value"';
@@ -47,9 +48,10 @@ let regexp = /\w+/g; // without flag "g", property lastIndex is ignored
 regexp.lastIndex = 4;
 let word = regexp.exec(str);
 console.log(word); // varName
-//Or
-regexp.lastIndex = 3;
 
+//Or
+
+regexp.lastIndex = 3;
 let word = regexp.exec(str);
 alert(word[0]); // varName
 alert(word.index); // 4
@@ -59,7 +61,6 @@ alert(word.index); // 4
 let str = 'let varName = "value"';
 
 let regexp = /\w+/y;
-
 regexp.lastIndex = 3;
 alert( regexp.exec(str) ); // null (there's a space at position 3, not a word)
 
