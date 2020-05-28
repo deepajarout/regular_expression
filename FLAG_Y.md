@@ -1,6 +1,8 @@
 # Sticky flag "y", searching at position
 
 The flag y allows to perform the search at the given position in the source string.
+
+
 **Example**-  we have a code string let varName = "value", and we need to read the variable name from it, that starts at position 4.
 We’ll look for variable name using regexp \w+. A call to str.match(/\w+/) will find only the first word in the line. Or all words with the flag g. But we need only one word at position 4.
 To **search from the given position**, we can use method ```regexp.exec(str)```.
