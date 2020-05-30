@@ -96,6 +96,19 @@ console.log(c); //[["Ink"], ["ink"]]
  console.log(c[0].index ); // 10 (first match position)
 console.log(c[1].index ); //35
 ```
+---
+# str.replace(str|regexp, str|func)
+
+This is a generic method for searching and replacing, one of most useful ones. The swiss army knife for searching and replacing.
+```javascript
+// replace a dash by a colon
+alert('12-34-56'.replace("-", ":")) // 12:34-56 
+//When the first argument of replace is a string, it only replaces the first match.
+//To find all hyphens, we need to use not the string "-", but a regexp /-/g, with the obligatory g flag:
+// replace all dashes by a colon
+alert( '12-34-56'.replace( /-/g, ":" ) )  // 12:34:56
+
+```
 
 
 
